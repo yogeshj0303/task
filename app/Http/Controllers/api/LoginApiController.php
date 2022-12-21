@@ -13,9 +13,7 @@ class LoginApiController extends Controller
     public function register(Request $request)
     {
         $checkuser = User::where('email',$request->email)->first();
-        if($checkuser->email==$request->email){
-            return  response()->json(['error' => true, 'message' => 'User is Already Register']);
-        }else{
+        
       $data =new User;
       $data->phone=$request->phone;
       $data->email=$request->email;
@@ -27,7 +25,7 @@ class LoginApiController extends Controller
     } else {
         return  response()->json(['error' => true, 'message' => 'Registration Failed']);
     }
-        }
+    
     }
 
     public function login(Request $request){
@@ -81,6 +79,28 @@ class LoginApiController extends Controller
         } else {
             return  response()->json(['error' => true, 'message' => 'Error']);
         }
+    }
+   }
+   public function updateArticle(Request $request){
+    $post = Article::where('id',$request->id)->first();
+    $post->title=$request->title;
+    $post->post=$request->post;
+    $post->save();
+    if($post){
+        return  response()->json(['error' => false, 'data' =>'Post Update Successfully']);
+    } else {
+        return  response()->json(['error' => true, 'message' => 'Error']);
+
+    }
+   }
+   public function deletePost(Request $request){
+    $post = Article::where('id',$request->id)->first();
+    $post->delete();
+    if($post){
+        return  response()->json(['error' => false, 'data' =>'Post Delete Successfully']);
+    } else {
+        return  response()->json(['error' => true, 'message' => 'Error']);
+
     }
    }
 }

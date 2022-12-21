@@ -23,3 +23,5 @@ Route::post('register', [LoginApiController::class, 'register']);
 Route::post('login', [LoginApiController::class, 'login']);
 Route::post('profile', [LoginApiController::class, 'profile']);
 Route::post('post', [LoginApiController::class, 'article']);
+Route::post('updatepost', [LoginApiController::class, 'updateArticle']);
+Route::post('delete', [LoginApiController::class, 'deletePost']);
